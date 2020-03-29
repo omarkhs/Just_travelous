@@ -1,0 +1,23 @@
+{
+  "name": "just_travelous",
+  "version": "1.0.0",
+  "description": "A travel web app for CS304 project",
+  "main": "server.js",
+  "scripts": {
+    "client": "cd client && npm start",
+    "start": "cd server && node server.js",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
+  },
+  "author": "Group 22",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omarkhs/just_travelous.git "
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
