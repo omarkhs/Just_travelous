@@ -1,4 +1,5 @@
-### Development Environment Setup
+## Development Environment Setup
+
 1. Install [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
 2. Clone this repository 
 3. Run `npm install` while being at the root directory; you may need to go to the `client` folder and run `npm install` if `React` dependencies didn't install correctly in first time.
