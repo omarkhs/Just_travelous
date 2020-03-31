@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "client": "cd client && npm start",
-    "start": "cd server && nodemon server.js",
-    "dev": "concurrently \"npm run start\" \"npm run client\""
+    "start": "cd backend && nodemon --exec babel-node server.js",
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "dev-start": "babel-watch server.js"
   },
   "author": "Group 22",
   "license": "ISC",
@@ -21,6 +22,12 @@
     "url": "https://github.com/omarkhs/just_travelous.git "
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-watch": "^7.0.0",
     "concurrently": "^5.1.0",
     "prettier": "2.0.2"
   }
