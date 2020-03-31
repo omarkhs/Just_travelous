@@ -22,3 +22,8 @@ Basically `npm run dev` runs two concurrent `npm start` commands, one for `Expre
 1. Documentation for the [mysql](https://github.com/mysqljs/mysql#preparing-queries) package. This package allows us to send SQL queries to the database.
 
 2. [Postman](https://www.postman.com) is a useful tool to send server API requests to test your queries. Make sure to test it with [http://localhost:5000](http://localhost:5000).
+
+### Troubleshooting
+
+1. If you are getting an error like 'Error: ER_NOT_SUPPORTED_AUTH_MODE' when attempting to connect to mySQL database after npm run dev, go to mySQL command line centre and enter: ALTER USER 'my_username'@'my_host' IDENTIFIED WITH 'mysql_native_password' BY 'my_password';
+Refer to [https://o7planning.org/en/11959/connecting-to-mysql-database-using-nodejs]
