@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CityHttpService from '../api/city.http.service';
 import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
 import { PagingState, IntegratedPaging } from '@devexpress/dx-react-grid';
 import {
   Grid,
@@ -9,14 +10,25 @@ import {
   PagingPanel,
 } from '@devexpress/dx-react-grid-material-ui';
 
+const styles = (theme) => ({
+  root: {
+    ...theme.mixins.gutters(),
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+    backgroundColor: theme.palette.secondary.light,
+  },
+});
 class CitiesTable extends Component {
-  state = {
-    columns: [
-      { name: 'city_name', title: 'City Name' },
-      { name: 'post_code', title: 'Postal Code' },
-    ],
-    rows: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      columns: [
+        { name: 'city_name', title: 'City Name' },
+        { name: 'post_code', title: 'Postal Code' },
+      ],
+      rows: [],
+    };
+  }
   componentDidMount() {
     console.log('componentDidMount');
     this.fetchData()
@@ -44,8 +56,9 @@ class CitiesTable extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <Paper>
+      <Paper className={classes.root}>
         <Grid rows={this.state.rows} columns={this.state.columns}>
           <PagingState defaultCurrentPage={0} pageSize={5} />
           <IntegratedPaging />
@@ -58,4 +71,4 @@ class CitiesTable extends Component {
   }
 }
 
-export default CitiesTable;
+export default withStyles(styles)(CitiesTable);
