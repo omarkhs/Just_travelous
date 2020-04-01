@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import logo from '../static/logo.svg';
-import '../stylesheets/App.css';
+import AddCityForm from '../components/AddCityFrom';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Layout } from '../components';
+import theme from '../theme/theme';
 
 class App extends Component {
   state = {
@@ -25,13 +28,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to React</h1>
-        </header>
-        <p className='App-intro'>{this.state.data}</p>
-      </div>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Layout>
+          <div className='App'>
+            <h1 className='App-title'>Just travelous</h1>
+            <AddCityForm />
+            <p className='App-intro'>{this.state.data}</p>
+          </div>
+        </Layout>
+      </ThemeProvider>
     );
   }
 }
