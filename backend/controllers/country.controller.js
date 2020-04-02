@@ -1,7 +1,7 @@
 // The controller job is to get the data from the model
-import { City } from '../models/city.model.js';
+import { Country } from '../models/country.model.js';
 
-// Create and Save a new City
+// Create and Save a new Country
 export function create(req, res) {
   if (!req.body) {
     res.status(400).send({
@@ -9,17 +9,17 @@ export function create(req, res) {
     });
   }
 
-  // Create new city with provided data
-  const city = new City({
-    CityName: req.body.CityName,
-    PostalCode: req.body.PostalCode,
+  // Create new Country with provided data
+  const country = new Country({
+    CountryName: req.body.CountryName,
+    Continent: req.body.Continent,
   });
 
-  // Save City in the database
-  City.create(city, (err, data) => {
+  // Save Country in the database
+  Country.create(country, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || 'Some error occurred while creating the city.',
+        message: err.message || 'Some error occurred while creating the country.',
       });
     else res.send(data);
   });
@@ -27,7 +27,7 @@ export function create(req, res) {
 
 // Retrieve all Cities from the database.
 export function findAll(req, res) {
-  City.getAll((err, data) => {
+  Country.getAll((err, data) => {
     if (err)
       res.status(500).send({
         message: err.message || 'Some error occurred while retrieving cities.',
@@ -36,17 +36,17 @@ export function findAll(req, res) {
   });
 }
 
-// Find a single City with a cityPostalCode
+// Find a single Country with a countryId
 export function findOne(req, res) {
-  City.findByPostalCode(req.params.cityPostalCode, (err, data) => {
+  Country.findByName(req.params.countryName, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `Not found city with id ${req.params.cityPostalCode}.`,
+          message: `Not found country with name ${req.params.countryName}.`,
         });
       } else {
         res.status(500).send({
-          message: 'Error retrieving city with id ' + req.params.cityPostalCode,
+          message: 'Error retrieving country with name ' + req.params.countryName,
         });
       }
     } else res.send(data);
