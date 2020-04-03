@@ -4,8 +4,7 @@
 import { findSpecific, findAll } from '../controllers/countryHasCity.controller';
 export default (server) => {
 
-// TODO 
-// get only the cities column from the division
+
 
   // Retrieve all cities in a specific country (Division)
   server.get('/countryhascity/:CountryNameCHC', findSpecific);
