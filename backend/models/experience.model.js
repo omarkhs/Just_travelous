@@ -5,7 +5,6 @@ import sql from './db.js';
 export class Experience {
   // Constructor for the experience object
   constructor(experience) { 
-    this.experience.id = experience.experience_id;
     this.experience.name = experience.experience_name;
     this.experience.rating = experience.experience_rating;
     this.experience.accessibility = experience.experience_accessibility;

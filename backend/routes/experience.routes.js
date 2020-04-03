@@ -10,24 +10,24 @@ export default (server) => {
   server.get('/experience', findAllExperience);
 
   // Retrieve all restaurants in response to get request
-  server.get('/experience', findAllRestaurant);
+  server.get('/experience/restaurant', findAllRestaurant);
 
   // Retrieve all entertainment in response to get request
-  server.get('/experience', findAllEntertainment);
+  server.get('/experience/entertainment', findAllEntertainment);
 
   // Retrieve all sightseeing in response to get request
-  server.get('/experience', findAllSightseeing);
+  server.get('/experience/sightseeing', findAllSightseeing);
 
   // Update experience 
-  server.post('/experience/:expId/:expName/:expRate/:expAccess/:expCost', update);
+  server.post('/experience/update/:expId/:expName/:expRate/:expAccess/:expCost', update);
 
   // Retrieve join
-  server.get('/experience', join);
+  server.get('/experience/join', join);
 
   // Retrieve count
-  server.get('/experience', count);
+  server.get('/experience/count', count);
 
   // Retrieve group by
-  server.get('/experience', groupBy);
+  server.get('/experience/groupBy', groupBy);
 
 };
