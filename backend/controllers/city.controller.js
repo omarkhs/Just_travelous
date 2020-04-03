@@ -11,8 +11,8 @@ export function create(req, res) {
 
   // Create new city with provided data
   const city = new City({
-    city_name: req.body.city_name,
-    post_code: req.body.post_code,
+    CityName: req.body.CityName,
+    PostalCode: req.body.PostalCode,
   });
 
   // Save City in the database
@@ -36,17 +36,17 @@ export function findAll(req, res) {
   });
 }
 
-// Find a single City with a cityId
+// Find a single City with a cityPostalCode
 export function findOne(req, res) {
-  City.findById(req.params.cityId, (err, data) => {
+  City.findByPostalCode(req.params.cityPostalCode, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `Not found city with id ${req.params.cityId}.`,
+          message: `Not found city with id ${req.params.cityPostalCode}.`,
         });
       } else {
         res.status(500).send({
-          message: 'Error retrieving city with id ' + req.params.cityId,
+          message: 'Error retrieving city with id ' + req.params.cityPostalCode,
         });
       }
     } else res.send(data);
