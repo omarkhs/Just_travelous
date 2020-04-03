@@ -30,13 +30,13 @@ export function findAll(req, res) {
   Country.getAll((err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving cities.',
+        message: err.message || 'Some error occurred while retrieving countries.',
       });
     else res.send(data);
   });
 }
 
-// Find a single Country with a countryId
+// Find a single Country with a countryName
 export function findOne(req, res) {
   Country.findByName(req.params.countryName, (err, data) => {
     if (err) {
@@ -47,6 +47,41 @@ export function findOne(req, res) {
       } else {
         res.status(500).send({
           message: 'Error retrieving country with name ' + req.params.countryName,
+        });
+      }
+    } else res.send(data);
+  });
+}
+
+// Delete a single Country with a countryName
+export function deleteOne(req, res) {
+  Country.deleteByName(req.params.countryName, (err, data) => {
+    if (err) {
+      if (err.kind === 'response due to not found') {
+        res.status(404).send({
+          message: `Not found country with name ${req.params.countryName}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: 'Error retrieving country with name ' + req.params.countryName,
+        });
+      }
+    } else res.send(data);
+  });
+}
+
+
+// Get a single Column with a countryName
+export function findColumn(req, res) {
+  Country.findByColumn(req.params.columnName, (err, data) => {
+    if (err) {
+      if (err.kind === 'response due to not found') {
+        res.status(404).send({
+          message: `Not found column with name ${req.params.columnName}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: 'Error retrieving column with name ' + req.params.columnName,
         });
       }
     } else res.send(data);

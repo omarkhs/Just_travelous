@@ -14,6 +14,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP database just_travelous;
 
 CREATE DATABASE just_travelous;
 
@@ -280,13 +281,16 @@ city
         (PostalCodeCHC) /*!80000 INVISIBLE */,
   CONSTRAINT CityNameCHC FOREIGN KEY
         (CityNameCHC) REFERENCES city
-        (CityName),
+        (CityName) ON  update CASCADE ON
+DELETE CASCADE,
   CONSTRAINT CountryNameCHC FOREIGN KEY
         (CountryNameCHC) REFERENCES country
-        (CountryName),
+        (CountryName) ON  update CASCADE ON
+DELETE CASCADE,
   CONSTRAINT PostalCodeCHC FOREIGN KEY
         (PostalCodeCHC) REFERENCES city
-        (PostalCode)
+        (PostalCode) ON  update CASCADE ON
+DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
