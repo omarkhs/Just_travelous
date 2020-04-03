@@ -125,7 +125,7 @@ export function count(req, res) {
 
 // groupBy
 export function groupBy(req, res) {
-  Experience.groupBy(req.params.expCost, req.params.resType, (err, data) => {
+  Experience.groupBy((err, data) => {
     if (err)
       res.status(500).send({
         message:
