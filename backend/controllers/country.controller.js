@@ -19,7 +19,8 @@ export function create(req, res) {
   Country.create(country, (err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || 'Some error occurred while creating the country.',
+        message:
+          err.message || 'Some error occurred while creating the country.',
       });
     else res.send(data);
   });
@@ -30,7 +31,8 @@ export function findAll(req, res) {
   Country.getAll((err, data) => {
     if (err)
       res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving countries.',
+        message:
+          err.message || 'Some error occurred while retrieving countries.',
       });
     else res.send(data);
   });
@@ -46,7 +48,8 @@ export function findOne(req, res) {
         });
       } else {
         res.status(500).send({
-          message: 'Error retrieving country with name ' + req.params.countryName,
+          message:
+            'Error retrieving country with name ' + req.params.countryName,
         });
       }
     } else res.send(data);
@@ -63,13 +66,13 @@ export function deleteOne(req, res) {
         });
       } else {
         res.status(500).send({
-          message: 'Error retrieving country with name ' + req.params.countryName,
+          message:
+            'Error retrieving country with name ' + req.params.countryName,
         });
       }
     } else res.send(data);
   });
 }
-
 
 // Get a single Column with a countryName
 export function findColumn(req, res) {

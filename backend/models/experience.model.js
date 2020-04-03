@@ -4,7 +4,7 @@ import sql from './db.js';
 
 export class Experience {
   // Constructor for the experience object
-  constructor(experience) { 
+  constructor(experience) {
     this.experience.name = experience.experience_name;
     this.experience.rating = experience.experience_rating;
     this.experience.accessibility = experience.experience_accessibility;
@@ -18,7 +18,10 @@ export class Experience {
         result(err, null);
         return;
       }
-      console.log('created experience: ', { id: res.insertId, ...newExperience });
+      console.log('created experience: ', {
+        id: res.insertId,
+        ...newExperience,
+      });
       result(null, { id: res.insertId, ...newExperience });
     });
   }
@@ -80,23 +83,25 @@ export class Experience {
   }
 
   static update(expId, expName, expRate, expAccess, expCost, result) {
-    sql.query(`UPDATE experience SET 
+    sql.query(
+      `UPDATE experience SET 
       ExperienceName = ?,
       ExperienceRating = ?,
       ExperienceAccessibility = ?,
       ExperienceCost = ?
-      WHERE ExperienceId = ?`, 
+      WHERE ExperienceId = ?`,
       [expName, expRate, expAccess, expCost, expId],
       (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        result(null, err);
-        return;
-      }
+        if (err) {
+          console.log('error: ', err);
+          result(null, err);
+          return;
+        }
 
-      console.log('update: ', res);
-      result(null, res);
-    });
+        console.log('update: ', res);
+        result(null, res);
+      }
+    );
   }
 
   static join(expCost, resType, result) {
@@ -112,17 +117,18 @@ export class Experience {
       WHERE 
         e.ExperienceCost > ?
         AND r.Type = ?`,
-        [expCost, resType],
-        (err, res) => {
-          if (err) {
-            console.log('error: ', err);
-            result(null, err);
-            return;
-          }
-    
-          console.log('join: ', res);
-          result(null, res);
-        });
+      [expCost, resType],
+      (err, res) => {
+        if (err) {
+          console.log('error: ', err);
+          result(null, err);
+          return;
+        }
+
+        console.log('join: ', res);
+        result(null, res);
+      }
+    );
   }
 
   static count(result) {
@@ -139,20 +145,21 @@ export class Experience {
   }
 
   static groupBy(result) {
-    sql.query(`SELECT ExperienceRating, AVG(ExperienceCost) 
+    sql.query(
+      `SELECT ExperienceRating, AVG(ExperienceCost) 
       FROM experience 
       GROUP BY ExperienceRating 
-      ORDER BY ExperienceRating`, 
+      ORDER BY ExperienceRating`,
       (err, res) => {
         if (err) {
           console.log('error: ', err);
           result(null, err);
           return;
         }
-  
+
         console.log('group: ', res);
         result(null, res);
-      });
+      }
+    );
   }
-
 }

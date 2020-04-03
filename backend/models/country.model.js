@@ -35,47 +35,49 @@ export class Country {
   }
 
   static findByName(countryName, result) {
-    sql.query(`SELECT * FROM country WHERE CountryName = ${countryName}`, (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        result(err, null);
-        return;
-      }
+    sql.query(
+      `SELECT * FROM country WHERE CountryName = ${countryName}`,
+      (err, res) => {
+        if (err) {
+          console.log('error: ', err);
+          result(err, null);
+          return;
+        }
 
-      if (res.length) {
-        console.log('found country: ', res[0]);
-        result(null, res[0]);
-        return;
-      }
+        if (res.length) {
+          console.log('found country: ', res[0]);
+          result(null, res[0]);
+          return;
+        }
 
-      // country with the id not found
-      result({ kind: 'not_found' }, null);
-    });
+        // country with the id not found
+        result({ kind: 'not_found' }, null);
+      }
+    );
   }
-
-
 
   static deleteByName(countryName, result) {
-    sql.query(`DELETE FROM  just_travelous.country WHERE CountryName = ${countryName}`, (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        result(err, null);
-        return;
+    sql.query(
+      `DELETE FROM  just_travelous.country WHERE CountryName = ${countryName}`,
+      (err, res) => {
+        if (err) {
+          console.log('error: ', err);
+          result(err, null);
+          return;
+        }
+
+        // SQL doesn't give an error if you are trying to delete something that is not there
+
+        // if (!res) {
+        //   console.log('response due to not found');
+        //   result(null, res[0]);
+        //   return;
+        // }
+
+        result(null, countryName + ' has been deleted');
       }
-
-      // SQL doesn't give an error if you are trying to delete something that is not there
-
-      // if (!res) {
-      //   console.log('response due to not found');
-      //   result(null, res[0]);
-      //   return;
-      // }
-
-      result(null, countryName + " has been deleted");
-
-    });
+    );
   }
-
 
   static findByColumn(columnName, result) {
     sql.query(`SELECT ${columnName} FROM country `, (err, res) => {
@@ -94,6 +96,5 @@ export class Country {
       // country with the id not found
       result({ kind: 'not_found' }, null);
     });
-
   }
 }
