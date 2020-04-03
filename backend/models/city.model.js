@@ -4,25 +4,25 @@ import sql from './db.js';
 
 export class City {
   // Constructor for the city object
-  constructor(city) { 
-    this.city_name = city.city_name;
-    this.post_code = city.post_code;
+  constructor(city) {
+    this.CityName = city.CityName;
+    this.PostalCode = city.PostalCode;
   }
 
   static create(newCity, result) {
-    sql.query(`INSERT INTO cities SET ?`, newCity, (err, res) => {
+    sql.query(`INSERT INTO city SET ?`, newCity, (err, res) => {
       if (err) {
         console.log('error: ', err);
         result(err, null);
         return;
       }
-      console.log('created city: ', { id: res.insertId, ...newCity });
-      result(null, { id: res.insertId, ...newCity });
+      console.log('created city: ', { newCity });
+      result(null, { newCity });
     });
   }
 
   static getAll(result) {
-    sql.query(`SELECT * FROM cities`, (err, res) => {
+    sql.query(`SELECT * FROM city`, (err, res) => {
       if (err) {
         console.log('error: ', err);
         result(null, err);
@@ -34,22 +34,25 @@ export class City {
     });
   }
 
-  static findById(cityId, result) {
-    sql.query(`SELECT * FROM cities WHERE id = ${cityId}`, (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        result(err, null);
-        return;
-      }
+  static findByPostalCode(cityPostalCode, result) {
+    sql.query(
+      `SELECT * FROM city WHERE PostalCode = ${cityPostalCode}`,
+      (err, res) => {
+        if (err) {
+          console.log('error: ', err);
+          result(err, null);
+          return;
+        }
 
-      if (res.length) {
-        console.log('found city: ', res[0]);
-        result(null, res[0]);
-        return;
-      }
+        if (res.length) {
+          console.log('found city: ', res[0]);
+          result(null, res[0]);
+          return;
+        }
 
-      // city with the id not found
-      result({ kind: 'not_found' }, null);
-    });
+        // city with the id not found
+        result({ kind: 'not_found' }, null);
+      }
+    );
   }
 }

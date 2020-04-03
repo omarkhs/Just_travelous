@@ -7,7 +7,7 @@ export default (server) => {
   server.post('/cities', create);
 
   // Retrieve a single City by its ID in response to get request
-  server.get('/cities/:cityId', findOne);
+  server.get('/cities/:cityPostalCode', findOne);
 
   // Retrieve all cities in response to get request
   server.get('/cities', findAll);
