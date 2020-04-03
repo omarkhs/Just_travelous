@@ -2,6 +2,7 @@ import express from 'express';
 import connectCitiesRoutes from "./routes/city.routes"
 import connectCountriesRoutes from "./routes/country.routes"
 import connectCountriesHasCitiesRoutes from "./routes/countryHasCity.routes"
+import connectExperienceRoutes from "./routes/experience.routes"
 
 import { json, urlencoded } from "body-parser";
 
@@ -26,7 +27,9 @@ server.get("/", (req, res) => {
 // Connect server with routes created
 connectCitiesRoutes(server);
 connectCountriesRoutes(server);
-connectCountriesHasCitiesRoutes(server);
+connectCountriesHasCitiesRoutes(server)
+connectExperienceRoutes(server);
+
 
 // set port, listen for requests
 server.listen(port, () => console.log(`Listening on port ${port}`));

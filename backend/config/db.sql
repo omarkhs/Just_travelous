@@ -331,8 +331,7 @@ country_has_city
         /*!50503 SET character_set_client = utf8mb4 */;
         CREATE TABLE experience
         (
-          ExperienceId char
-(15) NOT NULL,
+          ExperienceId INTEGER PRIMARY KEY AUTO_INCREMENT,
           ExperienceName char
 (30) DEFAULT NULL,
           ExperienceRating varchar
