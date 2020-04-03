@@ -104,7 +104,7 @@ export class Experience {
     );
   }
 
-  static join(expCost, resType, result) {
+  static join(expCost, restrType, result) {
     sql.query(
       `SELECT 
         e.ExperienceId, 
@@ -117,7 +117,7 @@ export class Experience {
       WHERE 
         e.ExperienceCost > ?
         AND r.Type = ?`,
-      [expCost, resType],
+      [expCost, restrType],
       (err, res) => {
         if (err) {
           console.log('error: ', err);

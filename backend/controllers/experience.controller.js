@@ -102,7 +102,7 @@ export function update(req, res) {
 
 // join
 export function join(req, res) {
-  Experience.join(req.params.expCost, req.params.resType, (err, data) => {
+  Experience.join(req.params.expCost, req.params.restrType, (err, data) => {
     if (err)
       res.status(500).send({
         message:

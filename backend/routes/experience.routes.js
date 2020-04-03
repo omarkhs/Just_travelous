@@ -35,7 +35,7 @@ export default (server) => {
   );
 
   // Retrieve join
-  server.get('/experience/join', join);
+  server.get('/experience/join/:expCost/:restrType', join);
 
   // Retrieve count
   server.get('/experience/count', count);
