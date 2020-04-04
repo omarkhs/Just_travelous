@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import AddCityForm from '../components/AddCityFrom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Layout } from '../components';
+import {
+  Layout,
+  AddCityForm,
+  CitiesTable,
+  CountryTable,
+  CountryCityTable,
+  ExperienceTable,
+  EntertainmentTable,
+  ResturantTable,
+  SightseeingTable,
+} from '../components';
 import theme from '../theme/theme';
-import CitiesTable from '../components/CitiesTable';
 
 class App extends Component {
   state = {
@@ -20,7 +28,7 @@ class App extends Component {
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
     const response = await fetch('http://localhost:5000/express');
-    console.log("back resp", response);
+    console.log('back resp', response);
     const body = await response.json();
     if (response.status !== 200) {
       throw Error(body.message);
@@ -37,6 +45,12 @@ class App extends Component {
             <h1 className='App-title'>Just travelous</h1>
             <AddCityForm />
             <CitiesTable />
+            <CountryTable />
+            <CountryCityTable />
+            <ExperienceTable />
+            <EntertainmentTable />
+            <ResturantTable />
+            <SightseeingTable />
             <p className='App-intro'>{this.state.data}</p>
           </div>
         </Layout>
