@@ -5,10 +5,10 @@ import sql from './db.js';
 export class Experience {
   // Constructor for the experience object
   constructor(experience) {
-    this.experience.name = experience.experience_name;
-    this.experience.rating = experience.experience_rating;
-    this.experience.accessibility = experience.experience_accessibility;
-    this.experience.cost = experience.experience_cost;
+    this.experience.name = experience.experienceName;
+    this.experience.rating = experience.experienceRating;
+    this.experience.accessibility = experience.experienceAccessibility;
+    this.experience.cost = experience.experienceCost;
   }
 
   static create(newExperience, result) {

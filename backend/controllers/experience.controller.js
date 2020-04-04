@@ -11,10 +11,10 @@ export function create(req, res) {
 
   // Create new Experience with provided data
   const experience = new Experience({
-    experience_name: req.body.experience_name,
-    experience_rating: req.body.experience_rating,
-    experience_accessibility: req.body.experience_accessibility,
-    experience_cost: req.body.experience_cost,
+    ExperienceName: req.body.experienceName,
+    ExperienceRating: req.body.experienceRating,
+    ExperienceAccessibility: req.body.experienceAccessibility,
+    ExperienceCost: req.body.experienceCost,
   });
 
   // Save Experience in the database
