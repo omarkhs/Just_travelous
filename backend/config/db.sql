@@ -16,6 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 SELECT @@FOREIGN_KEY_CHECKS; SET FOREIGN_KEY_CHECKS=1;
 
+UNLOCK TABLES;
 
 DROP database just_travelous;
 
@@ -252,11 +253,12 @@ city
         ('Shibuya', '1510053'),
         ('Madrid', '28008'),
         ('Madrid', '28014'),
-        ('Pistoia', '51100'),
+        ('Pistoia', '51103'),
         ('Paris', '75006'),
         ('Paris', '75007'),
-        ('Vancouver', 'V6A1X3'),
-        ('Whistler', 'V8E1B8');
+        ('Vancouver', 'V6A1X2'),
+        ('Whistler', 'V6A1X0');
+        
       /*!40000 ALTER TABLE city ENABLE KEYS */;
       UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -313,178 +315,132 @@ country_has_city
           ('United States', 'New York', '10036'),
           ('France', 'Paris', '75006'),
           ('France', 'Paris', '75007'),
-          ('Italy', 'Pistoia', '51100'),
+          ('Italy', 'Pistoia', '51103'),
           ('Italy', 'Rome', '00184'),
           ('Japan', 'Shibuya', '1510053'),
-          ('Canada', 'Vancouver', 'V6A1X3'),
-          ('Canada', 'Whistler', 'V8E1B8');
+          ('Canada', 'Vancouver', 'V6A1X2'),
+          ('Canada', 'Whistler', 'V6A1X0');
         /*!40000 ALTER TABLE country_has_city ENABLE KEYS */;
         UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-        --
-        -- Table structure for table experience
-        --
+--
+-- Table structure for table experience
+--
+DROP TABLE IF EXISTS experience;
 
-        DROP TABLE IF EXISTS experience;
-        /*!40101 SET @saved_cs_client     = @@character_set_client */;
-        /*!50503 SET character_set_client = utf8mb4 */;
-        CREATE TABLE experience
-        (
-          ExperienceId INTEGER PRIMARY KEY AUTO_INCREMENT,
-          ExperienceName char
-(30) DEFAULT NULL,
-          ExperienceRating varchar
-(45) DEFAULT NULL,
-          ExperienceAccessibility varchar
-(45) DEFAULT NULL,
-          ExperienceCost varchar
-(45) DEFAULT NULL,
-          PRIMARY KEY
-(ExperienceId)
-        )
-        ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE experience (
+  ExperienceId int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  ExperienceName char(30) NOT NULL,
+  ExperienceRating varchar(45) NOT NULL,
+  ExperienceAccessibility varchar(45) NOT NULL,
+  ExperienceCost varchar(45) NOT NULL
+);
 
 --
 -- Dumping data for table experience
 --
-
 LOCK TABLES experience WRITE;
-/*!40000 ALTER TABLE experience DISABLE KEYS */;
-        INSERT INTO 
-experience
-        VALUES
-          ('1', 'Eiffel Tower', '5', '3', '2'),
-          ('10', 'Cebo', '4', '4', '4'),
-          ('11', 'Metropolitan Museum of Art', '5', '4', '2'),
-          ('12', 'Shake Shack', '3', '3', '1'),
-          ('2', 'Guy Savoy', '4', '5', '5'),
-          ('3', 'Colosseum', '5', '4', '2'),
-          ('4', 'Zoo of Pistoia', '4', '4', '3'),
-          ('5', 'Tokyo Tower', '3', '4', '3'),
-          ('6', 'Shin Udon', '5', '2', '1'),
-          ('7', 'White Water Rafting', '4', '1', '4'),
-          ('8', 'The Keefer Bar', '4', '4', '3'),
-          ('9', 'Temple of Debod', '4', '2', '1');
-        /*!40000 ALTER TABLE experience ENABLE KEYS */;
-        UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-        --
-        -- Table structure for table restaurant
-        --
+INSERT INTO
+  experience
+VALUES
+  (1, 'Eiffel Tower', '5', '3', '2'),
+  (10, 'Cebo', '4', '4', '4'),
+  (11, 'Metropolitan Museum of Art', '5', '4', '2'),
+  (12, 'Shake Shack', '3', '3', '1'),
+  (2, 'Guy Savoy', '4', '5', '5'),
+  (3, 'Colosseum', '5', '4', '2'),
+  (4, 'Zoo of Pistoia', '4', '4', '3'),
+  (5, 'Tokyo Tower', '3', '4', '3'),
+  (6, 'Shin Udon', '5', '2', '1'),
+  (7, 'White Water Rafting', '4', '1', '4'),
+  (8, 'The Keefer Bar', '4', '4', '3'),
+  (9, 'Temple of Debod', '4', '2', '1');
 
-        DROP TABLE IF EXISTS restaurant;
-        /*!40101 SET @saved_cs_client     = @@character_set_client */;
-        /*!50503 SET character_set_client = utf8mb4 */;
-        CREATE TABLE restaurant
-        (
-          RestaurantExperienceId char
-(15) NOT NULL,
-          Capacity int DEFAULT NULL,
-          Type char
-(20) DEFAULT NULL,
-          PRIMARY KEY
-(RestaurantExperienceId),
-          CONSTRAINT RestaurantExperienceId FOREIGN KEY
-(RestaurantExperienceId) REFERENCES experience
-(ExperienceId)
-        )
-        ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table restaurant
+--
+DROP TABLE IF EXISTS restaurant;
+
+CREATE TABLE restaurant (
+  RestaurantExperienceId int NOT NULL,
+  Capacity int DEFAULT NULL,
+  TYPE char (20) DEFAULT NULL,
+  PRIMARY KEY (RestaurantExperienceId),
+  CONSTRAINT RestaurantExperienceId FOREIGN KEY (RestaurantExperienceId) REFERENCES experience (ExperienceId)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table restaurant
 --
-
 LOCK TABLES restaurant WRITE;
-/*!40000 ALTER TABLE restaurant DISABLE KEYS */;
-        INSERT INTO 
-restaurant
-        VALUES
-          ('10', 30, 'Spanish'),
-          ('12', 25, 'Fast Food'),
-          ('2', 50, 'French');
-        /*!40000 ALTER TABLE restaurant ENABLE KEYS */;
-        UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-        --
-        -- Table structure for table entertainment
-        --
+INSERT INTO
+  restaurant
+VALUES
+  (10, 30, 'Spanish'),
+  (12, 25, 'Fast Food'),
+  (2, 50, 'French');
 
-        DROP TABLE IF EXISTS entertainment;
-        /*!40101 SET @saved_cs_client     = @@character_set_client */;
-        /*!50503 SET character_set_client = utf8mb4 */;
-        CREATE TABLE entertainment
-        (
-          EntertainExperienceId char
-(15) NOT NULL,
-          AgeRating int DEFAULT NULL,
-          PRIMARY KEY
-(EntertainExperienceId),
-          CONSTRAINT EntertainExperienceId FOREIGN KEY
-(EntertainExperienceId) REFERENCES experience
-(ExperienceId)
-        )
-        ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table entertainment
+--
+DROP TABLE IF EXISTS entertainment;
+
+CREATE TABLE entertainment (
+  EntertainExperienceId int NOT NULL,
+  AgeRating int DEFAULT NULL,
+  PRIMARY KEY (EntertainExperienceId),
+  CONSTRAINT EntertainExperienceId FOREIGN KEY (EntertainExperienceId) REFERENCES experience (ExperienceId)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table entertainment
 --
-
 LOCK TABLES entertainment WRITE;
-/*!40000 ALTER TABLE entertainment DISABLE KEYS */;
-        INSERT INTO 
-entertainment
-        VALUES
-          ('4', 0),
-          ('7', 5),
-          ('8', 18);
-        /*!40000 ALTER TABLE entertainment ENABLE KEYS */;
-        UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-        --
-        -- Table structure for table sightseeing
-        --
+INSERT INTO
+  entertainment
+VALUES
+  (4, 0),
+  (7, 5),
+  (8, 18);
 
-        DROP TABLE IF EXISTS sightseeing;
-        /*!40101 SET @saved_cs_client     = @@character_set_client */;
-        /*!50503 SET character_set_client = utf8mb4 */;
-        CREATE TABLE sightseeing
-        (
-          SightSeeExperienceId char
-(15) NOT NULL,
-          Heritage char
-(5) DEFAULT NULL,
-          PRIMARY KEY
-(SightSeeExperienceId),
-          CONSTRAINT SightseeExperienceId FOREIGN KEY
-(SightSeeExperienceId) REFERENCES experience
-(ExperienceId)
-        )
-        ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table sightseeing
+--
+DROP TABLE IF EXISTS sightseeing;
+
+CREATE TABLE sightseeing (
+  SightSeeExperienceId int NOT NULL,
+  Heritage char (5) DEFAULT NULL,
+  PRIMARY KEY (SightSeeExperienceId),
+  CONSTRAINT SightseeExperienceId FOREIGN KEY (SightSeeExperienceId) REFERENCES experience (ExperienceId)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table sightseeing
 --
-
 LOCK TABLES sightseeing WRITE;
-/*!40000 ALTER TABLE sightseeing DISABLE KEYS */;
-        INSERT INTO 
-sightseeing
-        VALUES
-          ('1', 'yes'),
-          ('11', 'no'),
-          ('3', 'yes'),
-          ('5', 'no'),
-          ('9', 'yes');
-        /*!40000 ALTER TABLE sightseeing ENABLE KEYS */;
-        UNLOCK TABLES;
+
+INSERT INTO
+  sightseeing
+VALUES
+  (1, 'yes'),
+  (11, 'no'),
+  (3, 'yes'),
+  (5, 'no'),
+  (9, 'yes');
+
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
         --
@@ -496,15 +452,15 @@ sightseeing
         /*!50503 SET character_set_client = utf8mb4 */;
         CREATE TABLE address
         (
-          Street char
-(25) NOT NULL,
+          Street char (25) NOT NULL,
           StreetNo int NOT NULL,
-          PostalCode char
-(20) DEFAULT NULL,
+          PostalCode char (20) NOT NULL,
           PRIMARY KEY
 (Street,StreetNo),
           KEY StreetNo
-          (StreetNo)
+          (StreetNo),
+          KEY PostalCode
+          (PostalCode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -533,61 +489,45 @@ address
           UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-          --
-          -- Table structure for table has_address
-          --
+--
+-- Table structure for table has_address
+--
+DROP TABLE IF EXISTS has_address;
 
-          DROP TABLE IF EXISTS has_address;
-          /*!40101 SET @saved_cs_client     = @@character_set_client */;
-          /*!50503 SET character_set_client = utf8mb4 */;
-          CREATE TABLE has_address
-          (
-            ExperienceIdHA char
-(15) NOT NULL,
-            StreetHA char
-(25) NOT NULL,
-            StreetNoHA int NOT NULL,
-            PRIMARY KEY
-(ExperienceIdHA,StreetHA,StreetNoHA),
-            KEY StreetNoHA_idx
-            (StreetNoHA),
-  KEY StreetHA_idx
-            (StreetHA),
-  CONSTRAINT ExperienceIdHA FOREIGN KEY
-            (ExperienceIdHA) REFERENCES experience
-            (ExperienceId),
-  CONSTRAINT StreetHA FOREIGN KEY
-            (StreetHA) REFERENCES address
-            (Street),
-  CONSTRAINT StreetNoHA FOREIGN KEY
-            (StreetNoHA) REFERENCES address
-            (StreetNo)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE has_address (
+  ExperienceIdHA int NOT NULL,
+  StreetHA char (25) NOT NULL,
+  StreetNoHA int NOT NULL,
+  PRIMARY KEY (ExperienceIdHA, StreetHA, StreetNoHA),
+  KEY StreetNoHA_idx (StreetNoHA),
+  KEY StreetHA_idx (StreetHA),
+  CONSTRAINT ExperienceIdHA FOREIGN KEY (ExperienceIdHA) REFERENCES experience (ExperienceId),
+  CONSTRAINT StreetHA FOREIGN KEY (StreetHA) REFERENCES address (Street),
+  CONSTRAINT StreetNoHA FOREIGN KEY (StreetNoHA) REFERENCES address (StreetNo)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table has_address
 --
-
 LOCK TABLES has_address WRITE;
-/*!40000 ALTER TABLE has_address DISABLE KEYS */;
-            INSERT INTO 
-has_address
-            VALUES
-              ('3', 'Piazza del Colosseo', 1),
-              ('9', 'Calle de Ferraz', 1),
-              ('5', 'Shibakoen', 4),
-              ('1', 'Avenue Anatole', 5),
-              ('2', 'Quai de Conti', 11),
-              ('10', 'Carrera de S. Jeronimo', 34),
-              ('6', 'Shibuya City', 51),
-              ('8', 'Keefer St.', 135),
-              ('4', 'Via Pieve a Celle', 160),
-              ('12', '8th Avenue', 691),
-              ('11', '5th Avenue', 1000),
-              ('7', 'Mountain Square', 4293);
-            /*!40000 ALTER TABLE has_address ENABLE KEYS */;
-            UNLOCK TABLES;
+
+INSERT INTO
+  has_address
+VALUES
+  (3, 'Piazza del Colosseo', 1),
+  (9, 'Calle de Ferraz', 1),
+  (5, 'Shibakoen', 4),
+  (1, 'Avenue Anatole', 5),
+  (2, 'Quai de Conti', 11),
+  (10, 'Carrera de S. Jeronimo', 34),
+  (6, 'Shibuya City', 51),
+  (8, 'Keefer St.', 135),
+  (4, 'Via Pieve a Celle', 160),
+  (12, '8th Avenue', 691),
+  (11, '5th Avenue', 1000),
+  (7, 'Mountain Square', 4293);
+
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
             --
@@ -599,22 +539,17 @@ has_address
             /*!50503 SET character_set_client = utf8mb4 */;
             CREATE TABLE city_has_experience
             (
-              CityNameCHE char
-(30) NOT NULL,
-              PostalCodeCHE char
-(20) NOT NULL,
-              ExperienceIdCHE char
-(15) NOT NULL,
-              PRIMARY KEY
-(CityNameCHE,PostalCodeCHE,ExperienceIdCHE),
-              KEY PostalCodeCHE_idx
-              (PostalCodeCHE),
-  CONSTRAINT CityNameCHE FOREIGN KEY
-              (CityNameCHE) REFERENCES city
-              (CityName),
-  CONSTRAINT PostalCodeCHE FOREIGN KEY
-              (PostalCodeCHE) REFERENCES city
-              (PostalCode)
+              CityNameCHE char(30) NOT NULL,
+              PostalCodeCHE char (20) NOT NULL,
+              ExperienceIdCHE int NOT NULL,
+              PRIMARY KEY (CityNameCHE,PostalCodeCHE,ExperienceIdCHE),
+              KEY PostalCodeCHE_idx (PostalCodeCHE),
+              CONSTRAINT CityNameCHE FOREIGN KEY (CityNameCHE) REFERENCES city
+              (CityName) ON DELETE CASCADE,
+              CONSTRAINT PostalCodeCHE FOREIGN KEY (PostalCodeCHE) REFERENCES address
+              (PostalCode) ON DELETE CASCADE,
+              CONSTRAINT ExperienceIdCHE FOREIGN KEY (ExperienceIdCHE) REFERENCES experience
+              (ExperienceId) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -627,18 +562,23 @@ LOCK TABLES city_has_experience WRITE;
               INSERT INTO 
 city_has_experience
               VALUES
-                ('Rome', '00184', '3'),
-                ('New York', '10028', '11'),
-                ('New York', '10036', '12'),
-                ('Minato', '1050011', '5'),
-                ('Shibuya', '1510053', '6'),
-                ('Madrid', '28008', '9'),
-                ('Madrid', '28014', '10'),
-                ('Pistoia', '51100', '4'),
-                ('Paris', '75006', '2'),
-                ('Paris', '75007', '1'),
-                ('Vancouver', 'V6A1X3', '8'),
-                ('Whistler', 'V8E1B8', '7');
+                ('Rome', '00184', 3),
+                ('New York', '10028', 11),
+                ('New York', '10036', 12),
+                ('Minato', '1050011', 5),
+                ('Shibuya', '1510053', 6),
+                ('Madrid', '28008', 9),
+                ('Madrid', '28014', 10),
+                ('Pistoia', '51100', 4),
+                ('Paris', '75006', 2),
+                ('Paris', '75007', 1),
+                ('Vancouver', 'V6A1X3', 8),
+                ('Vancouver', 'V8E1B8', 7),
+                ('Whistler', 'V6A1X3', 8),
+                ('Whistler', 'V8E1B8', 7),
+                ('Vancouver', '51100', 4),
+                ('Whistler', '51100', 4);
+
               /*!40000 ALTER TABLE city_has_experience ENABLE KEYS */;
               UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

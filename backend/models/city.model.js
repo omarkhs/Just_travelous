@@ -52,6 +52,29 @@ export class City {
       result({ kind: 'not_found' }, null);
     });
   }
+
+
+  static deleteByName(cityName, result) {
+    sql.query(`DELETE FROM  just_travelous.city WHERE CityName = ${cityName}`, (err, res) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+        return;
+      }
+
+      // SQL doesn't give an error if you are trying to delete something that is not there
+
+      // if (!res) {
+      //   console.log('response due to not found');
+      //   result(null, res[0]);
+      //   return;
+      // }
+
+      result(null, cityName + " has been deleted");
+
+    });
+  }
+
 }
 
 

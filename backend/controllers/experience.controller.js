@@ -121,3 +121,14 @@ export function groupBy(req, res) {
   });
 }
 
+// division
+export function division(req, res) {
+  Experience.division((err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving group by result.',
+      });
+    else res.send(data);
+  });
+}
+
