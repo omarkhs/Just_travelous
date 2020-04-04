@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
 import ExperienceHttpService from '../../api/experience.http.service';
-import GenericTable from './GenericTable';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  PagingState,
+  IntegratedPaging,
+  EditingState,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  PagingPanel,
+  TableEditRow,
+  TableEditColumn,
+} from '@devexpress/dx-react-grid-material-ui';
+
+const styles = (theme) => ({
+  root: {
+    ...theme.mixins.gutters(),
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+    backgroundColor: theme.palette.secondary.light,
+  },
+});
 
 export class ExperienceTable extends Component {
   constructor(props) {
@@ -16,6 +39,7 @@ export class ExperienceTable extends Component {
       rows: [],
     };
   }
+
   componentDidMount() {
     console.log('componentDidMount');
     this.fetchData()
@@ -42,7 +66,68 @@ export class ExperienceTable extends Component {
     return result;
   };
 
+  commitChanges = ({ added, changed }) => {
+    let changedRows;
+    const { rows } = this.state;
+    if (added) {
+      const len = rows.length;
+      const startingAddedId = len > 0 ? rows[len - 1].ExperienceId + 1 : 0;
+      changedRows = [
+        ...rows,
+        ...added.map((row, index) => {
+          let newExp = {
+            ExperienceId: startingAddedId + index,
+            ...row,
+          };
+          console.log("new eexp", newExp)
+          ExperienceHttpService.create(newExp);
+          return newExp;
+        }),
+      ];
+    }
+
+    if (changed) {
+      changedRows = rows.map((row, index) => {
+        if (changed[index]) {
+          let updatedRow = { ...row, ...changed[index] };
+          ExperienceHttpService.updateExpById(
+            updatedRow.ExperienceId,
+            updatedRow.ExperienceName,
+            updatedRow.ExperienceRating,
+            updatedRow.ExperienceAccessibility,
+            updatedRow.ExperienceCost
+          );
+          return updatedRow;
+        } else return row;
+      });
+    }
+    console.log('chamnge rows', changedRows);
+    this.setState({ rows: changedRows });
+  };
+
   render() {
-    return <GenericTable rows={this.state.rows} columns={this.state.columns} />;
+    const { rows, columns } = this.state;
+    const { classes } = this.props;
+    return (
+      <Paper className={classes.root}>
+        <Grid rows={rows} columns={columns}>
+          <PagingState defaultCurrentPage={0} pageSize={5} />
+          <IntegratedPaging />
+          <EditingState
+            onCommitChanges={this.commitChanges}
+            columnExtensions={[
+              { columnName: 'ExperienceId', editingEnabled: false },
+            ]}
+          />
+          <Table />
+          <TableHeaderRow />
+          <TableEditRow />
+          <TableEditColumn showAddCommand showEditCommand />
+          <PagingPanel />
+        </Grid>
+      </Paper>
+    );
   }
 }
+
+export default withStyles(styles)(ExperienceTable);
