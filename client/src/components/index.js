@@ -1,5 +1,6 @@
 import Layout from './Layout/Layout';
 import AddCityForm from './Forms/AddCityFrom';
+import AddCountryForm from './Forms/AddCountryForm';
 import { CitiesTable } from './Tables/CitiesTable';
 import { CountryTable } from './Tables/CountryTable';
 import { CountryCityTable } from './Tables/CountryCityTable';
@@ -11,6 +12,7 @@ import GenericTable from './Tables/GenericTable';
 export {
   Layout,
   AddCityForm,
+  AddCountryForm,
   CitiesTable,
   CountryTable,
   GenericTable,

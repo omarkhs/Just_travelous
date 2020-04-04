@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   Layout,
   AddCityForm,
+  AddCountryForm,
   CitiesTable,
   CountryTable,
   CountryCityTable,
@@ -44,6 +45,7 @@ class App extends Component {
           <div className='App'>
             <h1 className='App-title'>Just travelous</h1>
             <AddCityForm />
+            <AddCountryForm />
             <CitiesTable />
             <CountryTable />
             <CountryCityTable />
