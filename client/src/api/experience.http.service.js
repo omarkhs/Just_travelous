@@ -21,8 +21,14 @@ class ExperienceHttpService {
     return http.get('/experience/sightseeing');
   }
 
-  updateExpById() {
-    return http.post('/experience/updateById');
+  updateExpById(id, name, rate, access, cost) {
+    return http.post('/experience/updateById', {
+      expId: id,
+      expName: name,
+      expRate: rate,
+      expAccess: access,
+      expCost: cost,
+    });
   }
 
   getJoined(expCost, restrType) {
