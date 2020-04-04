@@ -78,12 +78,13 @@ export function findAllSightseeing(req, res) {
 
 // update
 export function update(req, res) {
+  // TODO req body check
   Experience.update(
-    req.params.expId,
-    req.params.expName,
-    req.params.expRate,
-    req.params.expAccess,
-    req.params.expCost,
+    req.body.expId,
+    req.body.expName,
+    req.body.expRate,
+    req.body.expAccess,
+    req.body.expCost,
     (err, data) => {
       if (err) {
         if (err.kind === 'not_found') {
