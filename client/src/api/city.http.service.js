@@ -5,8 +5,8 @@ class CityHttpService {
     return http.get('/cities');
   }
 
-  get(id) {
-    return http.get(`/cities/${id}`);
+  get(cityPostalCode) {
+    return http.get(`/cities/${cityPostalCode}`);
   }
 
   create(newCity) {
