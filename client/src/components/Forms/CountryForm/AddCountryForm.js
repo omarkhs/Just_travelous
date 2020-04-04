@@ -2,8 +2,15 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CountryHttpService from '../../../api/country.http.service';
 import { useForm, Controller } from 'react-hook-form';
-import { CustomSelect } from './CustomSelect';
-import { Button, TextField, Paper, Container } from '@material-ui/core';
+import { CustomInput } from './CustomInput';
+import {
+  Button,
+  TextField,
+  Paper,
+  Container,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     margin: theme.spacing(2),
     backgroundColor: theme.palette.secondary.light,
+  },
+  select: {
+    marginRight: theme.spacing(2),
   },
 }));
 
@@ -63,16 +73,31 @@ export default function AddCountryForm() {
             inputRef={register(countryNameValidation)}
           />
           <Controller
-            as={<CustomSelect />}
+            as={
+              <Select
+                className={classes.select}
+                autoWidth={true}
+                variant='outlined'
+                input={<CustomInput />}>
+                <MenuItem value='Africa'>Africa</MenuItem>
+                <MenuItem value='Antarctica'>Antarctica</MenuItem>
+                <MenuItem value='Asia'>Asia</MenuItem>
+                <MenuItem value='Australia'>Australia</MenuItem>
+                <MenuItem value='Europe'>Europe</MenuItem>
+                <MenuItem value='North America'>North America</MenuItem>
+                <MenuItem value='South America'>South America</MenuItem>
+              </Select>
+            }
             control={control}
             rules={{ required: true }}
             name='Continent'
+            defaultValue='North America'
           />
           <Button
             variant='contained'
             color='primary'
             onClick={handleSubmit(onSubmit)}>
-            add country
+            add city
           </Button>
         </form>
       </Paper>
