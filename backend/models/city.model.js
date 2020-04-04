@@ -4,7 +4,7 @@ import sql from './db.js';
 
 export class City {
   // Constructor for the city object
-  constructor(city) { 
+  constructor(city) {
     this.CityName = city.CityName;
     this.PostalCode = city.PostalCode;
   }
@@ -16,8 +16,8 @@ export class City {
         result(err, null);
         return;
       }
-      console.log('created city: ', {newCity});
-      result(null, {newCity});
+      console.log('created city: ', { newCity });
+      result(null, { newCity });
     });
   }
 
@@ -35,22 +35,25 @@ export class City {
   }
 
   static findByPostalCode(cityPostalCode, result) {
-    sql.query(`SELECT * FROM city WHERE PostalCode = ${cityPostalCode}`, (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        result(err, null);
-        return;
-      }
+    sql.query(
+      `SELECT * FROM city WHERE PostalCode = ${cityPostalCode}`,
+      (err, res) => {
+        if (err) {
+          console.log('error: ', err);
+          result(err, null);
+          return;
+        }
 
-      if (res.length) {
-        console.log('found city: ', res[0]);
-        result(null, res[0]);
-        return;
-      }
+        if (res.length) {
+          console.log('found city: ', res[0]);
+          result(null, res[0]);
+          return;
+        }
 
-      // city with the id not found
-      result({ kind: 'not_found' }, null);
-    });
+        // city with the id not found
+        result({ kind: 'not_found' }, null);
+      }
+    );
   }
 
 
@@ -76,5 +79,3 @@ export class City {
   }
 
 }
-
-

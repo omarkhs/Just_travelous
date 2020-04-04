@@ -30,10 +30,7 @@ export default (server) => {
   server.get('/experience/sightseeing', findAllSightseeing);
 
   // Update experience
-  server.post(
-    '/experience/update/:expId/:expName/:expRate/:expAccess/:expCost',
-    update
-  );
+  server.post('/experience/updateById', update);
 
   // Retrieve join
   server.get('/experience/join/:expCost/:restrType', join);

@@ -4,12 +4,11 @@ import sql from './db.js';
 
 export class CountryHasCity {
   // Constructor for the country object
-  constructor(countyHasCity) { 
+  constructor(countyHasCity) {
     this.CountryNameCHC = countyHasCity.CountryNameCHC;
     this.CityNameCHC = countyHasCity.CityNameCHC;
     this.PostalCodeCHC = countyHasCity.PostalCodeCHC;
   }
-
 
   static getAll(result) {
     sql.query(`SELECT * FROM just_travelous.country_has_city `, (err, res) => {
@@ -24,30 +23,25 @@ export class CountryHasCity {
     });
   }
 
-
-
   static findByCountry(CountryNameCHC, result) {
-    sql.query(`SELECT CityNameCHC FROM just_travelous.country_has_city WHERE CountryNameCHC = ${CountryNameCHC}`, (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        result(err, null);
-        return;
-      }
+    sql.query(
+      `SELECT CityNameCHC FROM just_travelous.country_has_city WHERE CountryNameCHC = ${CountryNameCHC}`,
+      (err, res) => {
+        if (err) {
+          console.log('error: ', err);
+          result(err, null);
+          return;
+        }
 
-      if (res.length) {
-        console.log('found country: ', res);
-        result(null, res);
-        return;
-      }
+        if (res.length) {
+          console.log('found country: ', res);
+          result(null, res);
+          return;
+        }
 
-      // country with the id not found
-      result({ kind: 'not_found' }, null);
-    });
+        // country with the id not found
+        result({ kind: 'not_found' }, null);
+      }
+    );
   }
-
-
-
-  
-
-
 }
