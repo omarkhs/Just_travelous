@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import connectCitiesRoutes from './routes/city.routes';
 import connectCountriesRoutes from './routes/country.routes';
 import connectCountriesHasCitiesRoutes from './routes/countryHasCity.routes';
