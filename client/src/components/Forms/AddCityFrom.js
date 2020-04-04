@@ -1,5 +1,5 @@
 import React from 'react';
-import CityHttpService from '../api/city.http.service';
+import CityHttpService from '../../api/city.http.service';
 import { useForm } from 'react-hook-form';
 import { Button, TextField, Paper, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -64,7 +64,7 @@ export default function AddCityForm() {
       .catch((e) => {
         console.log('error in post request adding new city', e);
       });
-    reset({ city_name: '', post_code: '' });
+    reset({ CityName: '', PostalCode: '' });
   };
 
   return (
@@ -72,18 +72,18 @@ export default function AddCityForm() {
       <Paper className={classes.root} elevation={3}>
         <form>
           <TextField
-            name='city_name'
+            name='CityName'
             label='City Name'
             {...textFieldProps}
-            error={errors.city_name ? true : false}
-            helperText={errors.city_name ? errors.city_name.message : ''}
+            error={errors.CityName ? true : false}
+            helperText={errors.CityName ? errors.CityName.message : ''}
             inputRef={register(cityNameValidation)}
           />
           <TextField
-            name='post_code'
+            name='PostalCode'
             label='Postal Code'
-            error={errors.post_code ? true : false}
-            helperText={errors.post_code ? errors.post_code.message : ''}
+            error={errors.PostalCode ? true : false}
+            helperText={errors.PostalCode ? errors.PostalCode.message : ''}
             {...textFieldProps}
             inputRef={register(postalCodeValidation)}
           />
