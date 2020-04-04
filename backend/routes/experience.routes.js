@@ -11,6 +11,7 @@ import {
   join,
   count,
   groupBy,
+  division
 } from '../controllers/experience.controller';
 export default (server) => {
   // Create a new experience in response to post request
@@ -39,4 +40,8 @@ export default (server) => {
 
   // Retrieve group by
   server.get('/experience/groupBy', groupBy);
+
+  // Retrieve division
+  server.get('/experience/division', division);
+
 };

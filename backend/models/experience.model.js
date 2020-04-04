@@ -162,4 +162,29 @@ export class Experience {
       }
     );
   }
+
+  static division(result) {
+    sql.query(
+
+      `SELECT CityName
+      FROM city c
+      WHERE NOT EXISTS 
+      (SELECT e.EntertainExperienceId
+      FROM entertainment e
+      WHERE NOT EXISTS 
+      (SELECT chs.ExperienceIdCHE
+       FROM city_has_experience chs
+       WHERE chs.CityNameCHE = c.CityName AND chs.ExperienceIdCHE = e.EntertainExperienceId))`, 
+      (err, res) => {
+        if (err) {
+          console.log('error: ', err);
+          result(null, err);
+          return;
+        }
+  
+        console.log('group: ', res);
+        result(null, res);
+      });
+  }
+
 }

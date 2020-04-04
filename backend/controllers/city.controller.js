@@ -52,3 +52,22 @@ export function findOne(req, res) {
     } else res.send(data);
   });
 }
+
+
+  // Delete a single city with a countryName
+export function deleteOne(req, res) {
+  City.deleteByName(req.params.cityName, (err, data) => {
+    if (err) {
+      if (err.kind === 'response due to not found') {
+        res.status(404).send({
+          message: `Not found country with name ${req.params.cityName}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: 'Error retrieving country with name ' + req.params.cityName,
+        });
+      }
+    } else res.send(data);
+  });
+}
+
