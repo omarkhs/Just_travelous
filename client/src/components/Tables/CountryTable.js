@@ -25,7 +25,6 @@ export class CountryTable extends Component {
     };
   }
   componentDidMount() {
-    console.log('componentDidMount');
     this.fetchData()
       .then((res) => {
         console.log('cdm res', res);

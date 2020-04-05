@@ -41,7 +41,6 @@ export class ExperienceTable extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     this.fetchData()
       .then((res) => {
         console.log('cdm res', res);
@@ -79,7 +78,7 @@ export class ExperienceTable extends Component {
             ExperienceId: startingAddedId + index,
             ...row,
           };
-          console.log("new eexp", newExp)
+          console.log('new eexp', newExp);
           ExperienceHttpService.create(newExp);
           return newExp;
         }),
