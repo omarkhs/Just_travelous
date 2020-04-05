@@ -108,14 +108,16 @@ export class Experience {
     sql.query(
       `SELECT 
         e.ExperienceId, 
-        e.ExperienceCost, 
-        r.RestaurantExperienceId, 
-        r.Type 
+        e.ExperienceName,
+        e.ExperienceCost,
+        e.ExperienceRating,
+        r.Type,
+        r.Capacity 
       FROM experience e
       INNER JOIN restaurant r 
         ON e.ExperienceId = r.RestaurantExperienceId
       WHERE 
-        e.ExperienceCost > ?
+        e.ExperienceCost <= ?
         AND r.Type = ?`,
       [expCost, restrType],
       (err, res) => {
@@ -165,7 +167,6 @@ export class Experience {
 
   static division(result) {
     sql.query(
-
       `SELECT CityName
       FROM city c
       WHERE NOT EXISTS 
@@ -174,17 +175,17 @@ export class Experience {
       WHERE NOT EXISTS 
       (SELECT chs.ExperienceIdCHE
        FROM city_has_experience chs
-       WHERE chs.CityNameCHE = c.CityName AND chs.ExperienceIdCHE = e.EntertainExperienceId))`, 
+       WHERE chs.CityNameCHE = c.CityName AND chs.ExperienceIdCHE = e.EntertainExperienceId))`,
       (err, res) => {
         if (err) {
           console.log('error: ', err);
           result(null, err);
           return;
         }
-  
+
         console.log('group: ', res);
         result(null, res);
-      });
+      }
+    );
   }
-
 }
