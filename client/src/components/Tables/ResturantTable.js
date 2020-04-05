@@ -9,6 +9,7 @@ export class ResturantTable extends Component {
       columns: [
         { name: 'RestaurantExperienceId', title: 'ID' },
         { name: 'Capacity', title: 'Capacity' },
+        { name: 'TYPE', title: 'Type' },
       ],
       rows: [],
     };
