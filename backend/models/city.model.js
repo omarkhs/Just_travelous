@@ -56,9 +56,9 @@ export class City {
     );
   }
 
-
   static deleteByName(cityName, result) {
-    sql.query(`DELETE FROM  just_travelous.city WHERE CityName = ${cityName}`, (err, res) => {
+    // DONT REMOVE QUOTES AROUND CITYNAME OTHERWISE DELETE OPERATION WILL FAIL
+    sql.query(`DELETE FROM city WHERE CityName = '${cityName}'`, (err, res) => {
       if (err) {
         console.log('error: ', err);
         result(err, null);
@@ -73,9 +73,7 @@ export class City {
       //   return;
       // }
 
-      result(null, cityName + " has been deleted");
-
+      result(null, cityName + ' has been deleted');
     });
   }
-
 }
