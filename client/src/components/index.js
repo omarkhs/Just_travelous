@@ -2,6 +2,7 @@ import Layout from './Layout/Layout';
 import AddCityForm from './Forms/AddCityFrom';
 import JoinQueryForm from './Forms/JoinQueryForm';
 import AddCountryForm from './Forms/CountryForm/AddCountryForm';
+import ProjectionQueryForm from './Forms/ProjectionQueryForm';
 import { CitiesTable } from './Tables/CitiesTable';
 import { CountryTable } from './Tables/CountryTable';
 import { CountryCityTable } from './Tables/CountryCityTable';
@@ -15,6 +16,7 @@ export {
   AddCityForm,
   JoinQueryForm,
   AddCountryForm,
+  ProjectionQueryForm,
   CitiesTable,
   CountryTable,
   GenericTable,

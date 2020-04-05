@@ -13,6 +13,7 @@ import {
   ResturantTable,
   SightseeingTable,
   JoinQueryForm,
+  ProjectionQueryForm,
 } from '../components';
 import theme from '../theme/theme';
 
@@ -45,6 +46,7 @@ class App extends Component {
         <Layout>
           <div className='App'>
             <h1 className='App-title'>Just travelous</h1>
+            <ProjectionQueryForm />
             <AddCityForm />
             <AddCountryForm />
             <CitiesTable />
