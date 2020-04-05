@@ -18,7 +18,7 @@ class CountryHttpService {
   }
 
   delete(countryName) {
-    return http.delete(`/countries/${countryName}`, countryName);
+    return http.delete(`/countries/delete/${countryName}`, countryName);
   }
 
 }

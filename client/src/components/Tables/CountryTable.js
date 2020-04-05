@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import CountryHttpService from '../../api/country.http.service';
-import GenericTable from './GenericTable';
-
+import Paper from '@material-ui/core/Paper';
+import {
+  PagingState,
+  IntegratedPaging,
+  EditingState,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  PagingPanel,
+  TableEditColumn,
+} from '@devexpress/dx-react-grid-material-ui';
 export class CountryTable extends Component {
   constructor(props) {
     super(props);
@@ -39,9 +50,34 @@ export class CountryTable extends Component {
     return result;
   };
 
+  commitChanges = ({ deleted }) => {
+    let changedRows, deletedCoName;
+    const { rows } = this.state;
+    if (deleted) {
+      deletedCoName = rows[deleted].CountryName;
+      const deletedSet = new Set(deleted);
+      changedRows = rows.filter((row, index) => {
+        return !deletedSet.has(index);
+      });
+      CountryHttpService.delete(deletedCoName);
+      this.setState({ rows: changedRows });
+    }
+  };
+
   render() {
-    return <GenericTable rows={this.state.rows} columns={this.state.columns} />;
+    const { rows, columns } = this.state;
+    return (
+      <Paper>
+        <Grid rows={rows} columns={columns}>
+          <PagingState defaultCurrentPage={0} pageSize={5} />
+          <IntegratedPaging />
+          <EditingState onCommitChanges={this.commitChanges} />
+          <Table />
+          <TableHeaderRow />
+          <TableEditColumn showDeleteCommand />
+          <PagingPanel />
+        </Grid>
+      </Paper>
+    );
   }
 }
-
-
