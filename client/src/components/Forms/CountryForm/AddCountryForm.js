@@ -97,7 +97,7 @@ export default function AddCountryForm() {
             variant='contained'
             color='primary'
             onClick={handleSubmit(onSubmit)}>
-            add city
+            add country
           </Button>
         </form>
       </Paper>
