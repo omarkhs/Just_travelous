@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
 export default function JoinQueryForm() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
+  const [expCost, setCost] = useState(1);
+  const { register, handleSubmit, errors, reset } = useForm();
   const columns = [
     { name: 'ExperienceId', title: 'ID' },
     { name: 'ExperienceName', title: 'Name' },
@@ -40,7 +42,7 @@ export default function JoinQueryForm() {
     { name: 'Type', title: 'Cuisine' },
     { name: 'Capacity', title: 'Capacity' },
   ];
-  const { register, handleSubmit, errors, reset } = useForm();
+
   const textFieldProps = {
     type: 'text',
     variant: 'outlined',
@@ -80,9 +82,14 @@ export default function JoinQueryForm() {
     },
   ];
 
+  const updateCost = (value) => {
+    setCost(value);
+  };
+
   const onSubmit = (data) => {
-    const { ExperienceCost, Type } = data;
-    ExperienceHttpService.getJoined(ExperienceCost, Type)
+    const { Type } = data;
+    console.log(data);
+    ExperienceHttpService.getJoined(expCost, Type)
       .then((response) => {
         setRows(response.data);
         console.log('response of GET request Join ', response);
@@ -115,6 +122,9 @@ export default function JoinQueryForm() {
             max={5}
             marks={marks}
             inputRef={register()}
+            onChangeCommitted={(event, value) => {
+              updateCost(value);
+            }}
           />
         </div>
         <Button

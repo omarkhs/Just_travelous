@@ -2,8 +2,8 @@
 
 1. Install [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
 2. Clone this repository 
-3. Run `npm install` while being at the root directory; you may need to go to the `client` folder and run `npm install` if `React` dependencies didn't install correctly in first time.
-4. There are two `package.json` files one in root directory and the other in `client` folder. The one in the root folder is for `Express` server dependencies. While the one in `client` folder is for `React` dependencies. Make sure you are in root folder if you are new dependencies to backend, and in `client` folder if you are adding dependencies to `React`.
+3. Run `npm run deps` while being at the root directory; This will install both Server and React dependencies.
+4. Run the sql script in `backend/config/db.sql` to populate the database.
 
 ## Available Scripts
 
@@ -13,7 +13,6 @@ In the project directory, you can run:
 
 Runs both `Express` server and `React` development server in one command.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
-You should see EXPRESS BACKEND IS CONNECTED TO REACT<br />
 You can also open [http://localhost:5000](http://localhost:5000) it will show the server main page.<br />
 Basically `npm run dev` runs two concurrent `npm start` commands, one for `Express` and one for `React`
 
