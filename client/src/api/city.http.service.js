@@ -12,6 +12,10 @@ class CityHttpService {
   create(newCity) {
     return http.post('/cities', newCity);
   }
+
+  delete(cityName) {
+    return http.delete(`/cities/delete/${cityName}`);
+  }
 }
 
 export default new CityHttpService();
