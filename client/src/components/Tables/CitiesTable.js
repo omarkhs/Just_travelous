@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import CityHttpService from '../../api/city.http.service';
+import Paper from '@material-ui/core/Paper';
 import {
   PagingState,
   IntegratedPaging,
   EditingState,
 } from '@devexpress/dx-react-grid';
-import Paper from '@material-ui/core/Paper';
-
 import {
   Grid,
   Table,
   TableHeaderRow,
   PagingPanel,
-  TableEditRow,
   TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
 
@@ -76,7 +74,6 @@ export class CitiesTable extends Component {
           <PagingState defaultCurrentPage={0} pageSize={5} />
           <IntegratedPaging />
           <EditingState onCommitChanges={this.commitChanges} />
-
           <Table />
           <TableHeaderRow />
           <TableEditColumn showDeleteCommand />
