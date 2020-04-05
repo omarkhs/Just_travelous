@@ -58,7 +58,7 @@ export class Country {
 
   static deleteByName(countryName, result) {
     sql.query(
-      `DELETE FROM  country WHERE CountryName = '${countryName}'`,
+      `DELETE FROM country WHERE CountryName = '${countryName}'`,
       (err, res) => {
         if (err) {
           console.log('error: ', err);

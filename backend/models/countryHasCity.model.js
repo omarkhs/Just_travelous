@@ -11,7 +11,7 @@ export class CountryHasCity {
   }
 
   static getAll(result) {
-    sql.query(`SELECT * FROM just_travelous.country_has_city `, (err, res) => {
+    sql.query(`SELECT * FROM country_has_city `, (err, res) => {
       if (err) {
         console.log('error: ', err);
         result(null, err);
@@ -25,7 +25,7 @@ export class CountryHasCity {
 
   static findByCountry(CountryNameCHC, result) {
     sql.query(
-      `SELECT CityNameCHC FROM just_travelous.country_has_city WHERE CountryNameCHC = ${CountryNameCHC}`,
+      `SELECT CityNameCHC FROM country_has_city WHERE CountryNameCHC = ${CountryNameCHC}`,
       (err, res) => {
         if (err) {
           console.log('error: ', err);

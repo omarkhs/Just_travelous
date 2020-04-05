@@ -17,6 +17,9 @@ export default (server) => {
   // Create a new experience in response to post request
   server.post('/experience', create);
 
+  // Update experience
+  server.post('/experience/updateById', update);
+
   // Retrieve all experiences in response to get request
   server.get('/experience', findAllExperience);
 
@@ -28,9 +31,6 @@ export default (server) => {
 
   // Retrieve all sightseeing in response to get request
   server.get('/experience/sightseeing', findAllSightseeing);
-
-  // Update experience
-  server.post('/experience/updateById', update);
 
   // Retrieve join
   server.get('/experience/join/:expCost/:restrType', join);

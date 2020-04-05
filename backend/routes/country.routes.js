@@ -12,11 +12,11 @@ export default (server) => {
   // Create a new Country in response to post request
   server.post('/countries', create);
 
-  // Retrieve a single Country by its ID in response to get request
-  server.get('/countries/:countryName', findOne);
-
   // delete a single Country by its name in response to get request (Delete Operation)
   server.delete('/countries/delete/:countryName', deleteOne);
+
+  // Retrieve a single Country by its ID in response to get request
+  server.get('/countries/:countryName', findOne);
 
   // Retrieve all Countries in response to get request
   server.get('/countries', findAll);

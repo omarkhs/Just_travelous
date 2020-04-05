@@ -11,12 +11,12 @@ export default (server) => {
   // Create a new city in response to post request
   server.post('/cities', create);
 
+  // delete a single city by its name in response to get request (Delete Operation)
+  server.delete('/cities/delete/:cityName', deleteOne);
+
   // Retrieve a single City by its ID in response to get request
   server.get('/cities/:cityPostalCode', findOne);
 
   // Retrieve all cities in response to get request
   server.get('/cities', findAll);
-
-  // delete a single city by its name in response to get request (Delete Operation)
-  server.delete('/cities/delete/:cityName', deleteOne);
 };
