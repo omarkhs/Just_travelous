@@ -12,6 +12,7 @@ import {
   EntertainmentTable,
   ResturantTable,
   SightseeingTable,
+  JoinQueryForm,
 } from '../components';
 import theme from '../theme/theme';
 
@@ -51,6 +52,7 @@ class App extends Component {
             <CountryCityTable />
             <ExperienceTable />
             <EntertainmentTable />
+            <JoinQueryForm />
             <ResturantTable />
             <SightseeingTable />
             <p className='App-intro'>{this.state.data}</p>

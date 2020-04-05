@@ -45,12 +45,13 @@ export default function AddCityForm() {
       message: 'This field is required',
     },
     maxLength: {
-      value: 7,
-      message: "Postal code can't be more than 7 characters",
+      value: 10,
+      message: "Postal/Zip codes can't be more than 10 characters",
     },
     pattern: {
-      value: /[0-9][A-Z] ?[0-9][A-Z][0-9]/i,
-      message: 'Postal code should match the following format A1A 1A1',
+      value: /[0-9][A-Z] ?[0-9][A-Z][0-9]*/i | /[0-9]*/,
+      message:
+        'Postal code should match the following format A1A 1A1 or string of numbers',
     },
   };
 
@@ -81,7 +82,7 @@ export default function AddCityForm() {
           />
           <TextField
             name='PostalCode'
-            label='Postal Code'
+            label='Postal/Zip Code'
             error={errors.PostalCode ? true : false}
             helperText={errors.PostalCode ? errors.PostalCode.message : ''}
             {...textFieldProps}
