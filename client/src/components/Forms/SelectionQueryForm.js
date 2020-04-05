@@ -15,10 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
+  table: {
+    backgroundColor: theme.palette.background,
   },
 }));
 
-export default function AddCityForm() {
+export default function SelectionQueryForm() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
   const columns = [{ name: 'CityNameCHC', title: 'City Name' }];
@@ -52,12 +56,11 @@ export default function AddCityForm() {
   };
 
   return (
-    <Container maxWidth='sm'>
+    <Container maxWidth='xs'>
       <Paper className={classes.root} elevation={3}>
-        <GenericTable className={classes.table} columns={columns} rows={rows} />
-        <form>
+        <form className={classes.text}>
           <TextField
-            className={classes.text}
+            fullWidth
             name='CountryNameCHC'
             label='Country name'
             error={errors.CountryNameCHC ? true : false}
@@ -69,13 +72,14 @@ export default function AddCityForm() {
           />
           <br />
           <Button
-            className={classes.text}
+            fullWidth
             variant='contained'
             color='primary'
             onClick={handleSubmit(onSubmit)}>
             Get all country's cities
           </Button>
         </form>
+        <GenericTable className={classes.table} columns={columns} rows={rows} />
       </Paper>
     </Container>
   );

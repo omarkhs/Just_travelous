@@ -22,7 +22,7 @@ class GenericTable extends Component {
   render() {
     const { classes, rows, columns } = this.props;
     return (
-      <Paper className={classes.root}>
+      <Paper className={classes.root} elevation={3}>
         <Grid rows={rows} columns={columns}>
           <PagingState defaultCurrentPage={0} pageSize={5} />
           <IntegratedPaging />

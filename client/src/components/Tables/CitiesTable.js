@@ -13,8 +13,18 @@ import {
   PagingPanel,
   TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
+import { withStyles } from '@material-ui/styles';
 
-export class CitiesTable extends Component {
+const styles = (theme) => ({
+  root: {
+    ...theme.mixins.gutters(),
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+    backgroundColor: theme.palette.secondary.light,
+  },
+});
+
+class CitiesTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,9 +76,10 @@ export class CitiesTable extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { rows, columns } = this.state;
     return (
-      <Paper>
+      <Paper className={classes.root} elevation={3}>
         <Grid rows={rows} columns={columns}>
           <PagingState defaultCurrentPage={0} pageSize={5} />
           <IntegratedPaging />
@@ -82,3 +93,5 @@ export class CitiesTable extends Component {
     );
   }
 }
+
+export default withStyles(styles)(CitiesTable);

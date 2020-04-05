@@ -108,7 +108,7 @@ export class ExperienceTable extends Component {
     const { rows, columns } = this.state;
     const { classes } = this.props;
     return (
-      <Paper className={classes.root}>
+      <Paper className={classes.root} elevation={3}>
         <Grid rows={rows} columns={columns}>
           <PagingState defaultCurrentPage={0} pageSize={5} />
           <IntegratedPaging />

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     ...theme.mixins.gutters(),
     padding: theme.spacing(2),
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.light,
   },
   select: {
@@ -61,7 +61,7 @@ export default function AddCountryForm() {
   };
 
   return (
-    <Container maxWidth='xs'>
+    <Container maxWidth='sm'>
       <Paper className={classes.root} elevation={3}>
         <form>
           <TextField

@@ -5,7 +5,6 @@ import {
   Button,
   TextField,
   Paper,
-  Container,
   Slider,
   Typography,
 } from '@material-ui/core';
@@ -24,12 +23,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
-  table: {
-    backgroundColor: theme.palette.background,
+  form: {
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
   },
 }));
 
-export default function AddCityForm() {
+export default function JoinQueryForm() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
   const columns = [
@@ -94,39 +94,37 @@ export default function AddCityForm() {
   };
 
   return (
-    <Container maxWidth='md'>
-      <Paper className={classes.root} elevation={3}>
-        <form>
-          <TextField
-            name='Type'
-            label='Cuisine type'
-            error={errors.Type ? true : false}
-            helperText={errors.Type ? errors.Type.message : ''}
-            {...textFieldProps}
-            inputRef={register(resturantTypeValidation)}
+    <Paper className={classes.root} elevation={3}>
+      <form className={classes.form}>
+        <TextField
+          name='Type'
+          label='Cuisine type'
+          error={errors.Type ? true : false}
+          helperText={errors.Type ? errors.Type.message : ''}
+          {...textFieldProps}
+          inputRef={register(resturantTypeValidation)}
+        />
+        <div className={classes.slider}>
+          <Typography>Price Range</Typography>
+          <Slider
+            name='ExperienceCost'
+            defaultValue={1}
+            step={null}
+            valueLabelDisplay='auto'
+            min={1}
+            max={5}
+            marks={marks}
+            inputRef={register()}
           />
-          <div className={classes.slider}>
-            <Typography>Price Range</Typography>
-            <Slider
-              name='ExperienceCost'
-              defaultValue={1}
-              step={null}
-              valueLabelDisplay='auto'
-              min={1}
-              max={5}
-              marks={marks}
-              inputRef={register()}
-            />
-          </div>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={handleSubmit(onSubmit)}>
-            Get resturants
-          </Button>
-        </form>
-        <GenericTable className={classes.table} columns={columns} rows={rows} />
-      </Paper>
-    </Container>
+        </div>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={handleSubmit(onSubmit)}>
+          Get resturants
+        </Button>
+      </form>
+      <GenericTable columns={columns} rows={rows} />
+    </Paper>
   );
 }

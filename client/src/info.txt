@@ -1,9 +1,0 @@
-Database (mysql server) <---> Server <----> React 
-
-mysql
-Storage <---> tables <--> ORM 
-
-DOM <----> React 
-
-
-JS -- mesh optmized 

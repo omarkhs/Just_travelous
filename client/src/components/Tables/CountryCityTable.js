@@ -7,9 +7,9 @@ export class CountryCityTable extends Component {
     super(props);
     this.state = {
       columns: [
-        { name: 'CountryNameCHC', title: 'Country Name' },
-        { name: 'CityNameCHC', title: 'City Name' },
-        { name: 'PostalCodeCHC', title: 'City Postal Code' },
+        { name: 'CountryNameCHC', title: 'Country' },
+        { name: 'CityNameCHC', title: 'City' },
+        { name: 'PostalCodeCHC', title: 'Postal Code' },
       ],
       rows: [],
     };

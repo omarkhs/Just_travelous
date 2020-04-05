@@ -13,16 +13,15 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     backgroundColor: theme.palette.secondary,
   },
-  slider: {
-    padding: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
   table: {
     backgroundColor: theme.palette.background,
   },
+  text: {
+    marginLeft: theme.spacing(2),
+  },
 }));
 
-export default function AddCityForm() {
+export default function ProjectionQueryForm() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
   const columns = [
@@ -45,7 +44,7 @@ export default function AddCityForm() {
       message: 'This field is required',
     },
     pattern: {
-      value: /Continent/i|/Continent/i,
+      value: /Continent/i | /Continent/i,
       message: 'should be either country or continent',
     },
   };
@@ -76,8 +75,9 @@ export default function AddCityForm() {
   return (
     <Container maxWidth='sm'>
       <Paper className={classes.root} elevation={3}>
-        <form>
+        <form className={classes.text}>
           <TextField
+            fullWidth
             name='Column'
             label='Table Column'
             error={errors.Column ? true : false}
@@ -86,6 +86,7 @@ export default function AddCityForm() {
             inputRef={register(columnValidation)}
           />
           <Button
+            fullWidth
             variant='contained'
             color='primary'
             onClick={handleSubmit(onSubmit)}>

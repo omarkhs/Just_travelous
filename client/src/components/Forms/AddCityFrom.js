@@ -11,9 +11,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     backgroundColor: theme.palette.secondary.light,
   },
-  inline: {
-    display: 'inline',
-  },
 }));
 
 export default function AddCityForm() {

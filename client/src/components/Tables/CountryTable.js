@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CountryHttpService from '../../api/country.http.service';
 import Paper from '@material-ui/core/Paper';
+
 import {
   PagingState,
   IntegratedPaging,
@@ -13,12 +14,23 @@ import {
   PagingPanel,
   TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
-export class CountryTable extends Component {
+import { withStyles } from '@material-ui/styles';
+
+const styles = (theme) => ({
+  root: {
+    ...theme.mixins.gutters(),
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+    backgroundColor: theme.palette.secondary.light,
+  },
+});
+
+class CountryTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       columns: [
-        { name: 'CountryName', title: 'Country Name' },
+        { name: 'CountryName', title: 'Country' },
         { name: 'Continent', title: 'Continent' },
       ],
       rows: [],
@@ -64,9 +76,10 @@ export class CountryTable extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { rows, columns } = this.state;
     return (
-      <Paper>
+      <Paper className={classes.root} elevation={3}>
         <Grid rows={rows} columns={columns}>
           <PagingState defaultCurrentPage={0} pageSize={5} />
           <IntegratedPaging />
@@ -80,3 +93,5 @@ export class CountryTable extends Component {
     );
   }
 }
+
+export default withStyles(styles)(CountryTable);
