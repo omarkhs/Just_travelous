@@ -25,7 +25,7 @@ export class CountryHasCity {
 
   static findByCountry(CountryNameCHC, result) {
     sql.query(
-      `SELECT CityNameCHC FROM country_has_city WHERE CountryNameCHC = ${CountryNameCHC}`,
+      `SELECT CityNameCHC FROM country_has_city WHERE CountryNameCHC = '${CountryNameCHC}'`,
       (err, res) => {
         if (err) {
           console.log('error: ', err);

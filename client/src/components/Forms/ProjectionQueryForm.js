@@ -45,7 +45,7 @@ export default function AddCityForm() {
       message: 'This field is required',
     },
     pattern: {
-      value: /Country/i | /Continent/i,
+      value: /Continent/i|/Continent/i,
       message: 'should be either country or continent',
     },
   };
