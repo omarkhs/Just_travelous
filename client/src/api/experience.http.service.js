@@ -42,6 +42,10 @@ class ExperienceHttpService {
   getGroup() {
     return http.get('/experience/groupBy');
   }
+
+  getFunCities() {
+    return http.get('/experience/division');
+  }
 }
 
 export default new ExperienceHttpService();

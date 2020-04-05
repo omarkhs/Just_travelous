@@ -12,6 +12,7 @@ import { EntertainmentTable } from './Tables/EntertainmentTable';
 import { ResturantTable } from './Tables/ResturantTable';
 import { SightseeingTable } from './Tables/SightseeingTable';
 import GenericTable from './Tables/GenericTable';
+import CardWithQs from './CardWithQs.js';
 export {
   Layout,
   AddCityForm,
@@ -27,4 +28,5 @@ export {
   ResturantTable,
   SightseeingTable,
   SelectionQueryForm,
+  CardWithQs,
 };
