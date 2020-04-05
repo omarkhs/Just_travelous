@@ -17,7 +17,7 @@ class Experiences extends Component {
         <CardWithQs />
         <ExperienceTable />
         <JoinQueryForm />
-        <Typography variant='h5'>Dinning</Typography>
+        <Typography variant='h5'>Dining</Typography>
         <ResturantTable />
         <Typography variant='h5'>Entertainment</Typography>
         <EntertainmentTable />

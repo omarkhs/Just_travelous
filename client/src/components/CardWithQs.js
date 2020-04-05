@@ -65,7 +65,7 @@ export default function CountCard() {
           The total number of experiences is: {count ? count : ''}
         </Typography>
         <Typography variant='subtitle1' color='textPrimary'>
-          All Cities with all the entertainment experiences:{' '}
+          All Cities with no entertainment experiences:{' '}
           {cities
             ? cities.map((city, idx) => <p key={idx}>{city.CityName}</p>)
             : ''}
@@ -95,7 +95,7 @@ export default function CountCard() {
           variant='contained'
           color='primary'
           onClick={getFunCities}>
-          Where is all the fun at?
+          Where is there no entertainment?
         </Button>
         <Button
           size='small'

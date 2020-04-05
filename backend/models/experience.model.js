@@ -167,12 +167,12 @@ export class Experience {
 
   static division(result) {
     sql.query(
-      `SELECT CityName
+      `SELECT Distinct CityName
       FROM city c
       WHERE NOT EXISTS 
       (SELECT e.EntertainExperienceId
       FROM entertainment e
-      WHERE NOT EXISTS 
+      WHERE EXISTS 
       (SELECT chs.ExperienceIdCHE
        FROM city_has_experience chs
        WHERE chs.CityNameCHE = c.CityName AND chs.ExperienceIdCHE = e.EntertainExperienceId))`,
