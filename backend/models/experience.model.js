@@ -172,7 +172,7 @@ export class Experience {
       WHERE NOT EXISTS 
       (SELECT e.EntertainExperienceId
       FROM entertainment e
-      WHERE EXISTS 
+      WHERE NOT EXISTS 
       (SELECT chs.ExperienceIdCHE
        FROM city_has_experience chs
        WHERE chs.CityNameCHE = c.CityName AND chs.ExperienceIdCHE = e.EntertainExperienceId))`,
